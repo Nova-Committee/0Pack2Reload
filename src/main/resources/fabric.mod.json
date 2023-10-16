@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "opack2reload",
+  "version": "${version}",
+  "name": "OPack2Reload",
+  "description": "",
+  "authors": [
+    "Tapio"
+  ],
+  "contact": {},
+  "license": "Nova Relay License 1.0",
+  "environment": "client",
+  "mixins": [
+    "opack2reload.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "*"
+  }
+}
