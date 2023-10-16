@@ -2,11 +2,12 @@ package committee.nova.opack2reload.fabric.mixin;
 
 import committee.nova.opack2reload.fabric.api.IPackSelectionScreen;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.OptionsScreen;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.packs.PackSelectionScreen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,10 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinPackSelectionScreen extends Screen implements IPackSelectionScreen {
     @Shadow
     protected abstract void closeWatcher();
-
-    @Shadow
-    @Final
-    private Screen lastScreen;
     @Unique
     private Button cancelButton;
 
@@ -31,11 +28,11 @@ public abstract class MixinPackSelectionScreen extends Screen implements IPackSe
 
     @Inject(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/packs/PackSelectionScreen;reload()V"))
     private void inject$init(CallbackInfo ci) {
-        cancelButton = this.addRenderableWidget(new Button(this.width / 2 - 75, this.height - 24, 150, 20, CommonComponents.GUI_CANCEL, button -> {
-            if (minecraft == null) return;
-            minecraft.setScreen(this.lastScreen);
+        cancelButton = this.addRenderableWidget(Button.builder(CommonComponents.GUI_CANCEL, button -> {
             closeWatcher();
-        }));
+            if (minecraft == null) return;
+            minecraft.setScreen(new OptionsScreen(new TitleScreen(), minecraft.options));
+        }).bounds(this.width / 2 - 75, this.height - 24, 150, 20).build());
     }
 
     @Override

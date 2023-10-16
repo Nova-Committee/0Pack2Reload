@@ -7,7 +7,7 @@
   ],
   "client": [
     "InvokerPackRepository",
-    "MixinOptionsScreen",
+    "MixinOptions",
     "MixinPackSelectionScreen"
   ],
   "injectors": {
