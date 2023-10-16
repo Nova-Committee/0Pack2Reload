@@ -19,7 +19,7 @@ group = 'committee.nova'
 version = '1.0.0'
 
 java {
-    archivesBaseName = 'opack2reload'
+    archivesBaseName = '0Pack2Reload-Forge-1.18.2'
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
