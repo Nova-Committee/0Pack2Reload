@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "committee.nova.opack2reload.forge.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "opack2reload.forge.refmap.json",
+  "client": [
+    "InvokerPackRepository",
+    "MixinOptionsScreen",
+    "MixinPackSelectionScreen"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
