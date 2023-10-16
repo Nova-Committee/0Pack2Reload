@@ -2,13 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "committee.nova.opack2reload.fabric.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
     "InvokerPackRepository",
     "MixinOptionsScreen",
-    "MixinPackSelectionScreen"
+    "MixinPackScreen"
   ],
   "injectors": {
     "defaultRequire": 1

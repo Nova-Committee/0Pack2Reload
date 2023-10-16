@@ -1,5 +1,6 @@
 package committee.nova.opack2reload.fabric.mixin;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.screens.OptionsScreen;
 import net.minecraft.server.packs.repository.Pack;
@@ -20,9 +21,9 @@ public abstract class MixinOptionsScreen {
     private Options options;
 
     @Inject(method = "updatePackList", at = @At("HEAD"))
-    private void inject$updatePackList(PackRepository repo, CallbackInfo ci) {
+    private void inject$updatePackList(PackRepository list, CallbackInfo ci) {
         if (!options.resourcePacks.isEmpty()) return;
-        final List<Pack> packs = ((InvokerPackRepository) repo).callRebuildSelected(List.of());
+        final List<Pack> packs = ((InvokerPackRepository) list).callRebuildSelected(ImmutableList.of());
         for (Pack pack : packs) {
             if (!pack.isFixedPosition()) {
                 this.options.resourcePacks.add(pack.getId());

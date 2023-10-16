@@ -15,7 +15,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PackSelectionScreen.class)
-public abstract class MixinPackSelectionScreen extends Screen implements IPackSelectionScreen {
+public abstract class MixinPackScreen extends Screen implements IPackSelectionScreen {
+    protected MixinPackScreen(Component component) {
+        super(component);
+    }
+
     @Shadow
     protected abstract void closeWatcher();
 
@@ -25,16 +29,13 @@ public abstract class MixinPackSelectionScreen extends Screen implements IPackSe
     @Unique
     private Button cancelButton;
 
-    protected MixinPackSelectionScreen(Component text) {
-        super(text);
-    }
 
     @Inject(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/packs/PackSelectionScreen;reload()V"))
     private void inject$init(CallbackInfo ci) {
-        cancelButton = this.addRenderableWidget(new Button(this.width / 2 - 75, this.height - 24, 150, 20, CommonComponents.GUI_CANCEL, button -> {
+        cancelButton = this.addButton(new Button(this.width / 2 - 75, this.height - 24, 150, 20, CommonComponents.GUI_CANCEL, button -> {
             if (minecraft == null) return;
             minecraft.setScreen(this.lastScreen);
-            closeWatcher();
+            this.closeWatcher();
         }));
     }
 
