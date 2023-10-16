@@ -5,9 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "opack2reload.forge.refmap.json",
   "client": [
-    "InvokerPackRepository",
+    "InvokerResourcePackList",
     "MixinOptionsScreen",
-    "MixinPackSelectionScreen"
+    "MixinPackScreen"
   ],
   "injectors": {
     "defaultRequire": 1

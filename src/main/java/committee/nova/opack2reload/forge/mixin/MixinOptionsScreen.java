@@ -1,9 +1,10 @@
 package committee.nova.opack2reload.forge.mixin;
 
-import net.minecraft.client.Options;
-import net.minecraft.client.gui.screens.OptionsScreen;
-import net.minecraft.server.packs.repository.Pack;
-import net.minecraft.server.packs.repository.PackRepository;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.client.GameSettings;
+import net.minecraft.client.gui.screen.OptionsScreen;
+import net.minecraft.resources.ResourcePackInfo;
+import net.minecraft.resources.ResourcePackList;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,13 +18,13 @@ import java.util.List;
 public abstract class MixinOptionsScreen {
     @Shadow
     @Final
-    private Options options;
+    private GameSettings options;
 
     @Inject(method = "updatePackList", at = @At("HEAD"))
-    private void inject$updatePackList(PackRepository repo, CallbackInfo ci) {
+    private void inject$updatePackList(ResourcePackList list, CallbackInfo ci) {
         if (!options.resourcePacks.isEmpty()) return;
-        final List<Pack> packs = ((InvokerPackRepository) repo).callRebuildSelected(List.of());
-        for (Pack pack : packs) {
+        final List<ResourcePackInfo> packs = ((InvokerResourcePackList) list).callRebuildSelected(ImmutableList.of());
+        for (ResourcePackInfo pack : packs) {
             if (!pack.isFixedPosition()) {
                 this.options.resourcePacks.add(pack.getId());
                 if (!pack.getCompatibility().isCompatible()) {

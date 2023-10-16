@@ -20,7 +20,7 @@ version = '1.0.0'
 
 java {
     archivesBaseName = "0Pack2Reload-Forge-${project.minecraft_version}"
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    toolchain.languageVersion = JavaLanguageVersion.of(8)
 }
 
 minecraft {
