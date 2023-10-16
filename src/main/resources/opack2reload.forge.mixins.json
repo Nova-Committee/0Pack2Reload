@@ -6,7 +6,7 @@
   "refmap": "opack2reload.forge.refmap.json",
   "client": [
     "InvokerPackRepository",
-    "MixinOptionsScreen",
+    "MixinOptions",
     "MixinPackSelectionScreen"
   ],
   "injectors": {
