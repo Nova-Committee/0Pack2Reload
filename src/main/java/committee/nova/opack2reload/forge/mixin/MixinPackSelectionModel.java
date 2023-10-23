@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.function.Consumer;
 
 @Mixin(PackSelectionModel.class)
-public class MixinPackSelectionModel implements IPackSelectionModel {
+public abstract class MixinPackSelectionModel implements IPackSelectionModel {
     @Shadow
     @Final
     private Consumer<PackRepository> output;
