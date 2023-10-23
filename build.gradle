@@ -16,7 +16,7 @@ plugins {
 apply plugin: 'org.spongepowered.mixin'
 
 group = 'committee.nova'
-version = '1.0.0'
+version = '1.0.1'
 
 java {
     archivesBaseName = "0Pack2Reload-Forge-${project.minecraft_version}"
