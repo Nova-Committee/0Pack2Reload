@@ -3,11 +3,14 @@
   "id": "opack2reload",
   "version": "${version}",
   "name": "OPack2Reload",
-  "description": "",
+  "description": "Prevent Minecraft from reloading the resource packs if the player doesn't really change the selected packs. Also add a \"Cancel\" button to PackSelectionScreen.",
   "authors": [
     "Tapio"
   ],
-  "contact": {},
+  "contact": {
+    "sources": "https://github.com/Nova-Committee/0Pack2Reload",
+    "issues": "https://github.com/Nova-Committee/0Pack2Reload/issues"
+  },
   "license": "Nova Relay License 1.0",
   "environment": "client",
   "mixins": [

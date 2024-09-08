@@ -3,6 +3,8 @@ package committee.nova.opack2reload.fabric.mixin;
 import committee.nova.opack2reload.fabric.api.IPackSelectionModel;
 import committee.nova.opack2reload.fabric.api.IPackSelectionScreen;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.layouts.LayoutElement;
+import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.packs.PackSelectionModel;
 import net.minecraft.client.gui.screens.packs.PackSelectionScreen;
@@ -13,8 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(PackSelectionScreen.class)
 public abstract class MixinPackSelectionScreen extends Screen implements IPackSelectionScreen {
@@ -31,16 +32,33 @@ public abstract class MixinPackSelectionScreen extends Screen implements IPackSe
         super(text);
     }
 
-    @Inject(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/packs/PackSelectionScreen;reload()V"))
-    private void inject$init(CallbackInfo ci) {
-        cancelButton = this.addRenderableWidget(Button.builder(CommonComponents.GUI_CANCEL, button -> {
-            ((IPackSelectionModel) this.model).cancel();
+    //@Inject(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/packs/PackSelectionScreen;reload()V"))
+    //private void inject$init(CallbackInfo ci) {
+    //    cancelButton = this.addRenderableWidget(Button.builder(CommonComponents.GUI_CANCEL, button -> {
+    //        ((IPackSelectionModel) this.model).opack2reload_cancel();
+    //        closeWatcher();
+    //    }).bounds(this.width / 2 - 75, this.height - 24, 150, 20).build());
+    //}
+
+    @Redirect(
+            method = "init",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/layouts/LinearLayout;addChild(Lnet/minecraft/client/gui/layouts/LayoutElement;)Lnet/minecraft/client/gui/layouts/LayoutElement;",
+                    ordinal = 3
+            )
+    )
+    private <T extends LayoutElement> T redirect$init(LinearLayout instance, T layoutElement) {
+        final T done = instance.addChild(layoutElement);
+        cancelButton = instance.addChild(Button.builder(CommonComponents.GUI_CANCEL, button -> {
+            ((IPackSelectionModel) this.model).opack2reload_cancel();
             closeWatcher();
-        }).bounds(this.width / 2 - 75, this.height - 24, 150, 20).build());
+        }).build());
+        return done;
     }
 
     @Override
-    public Button getCancelButton() {
+    public Button opack2reload_getCancelButton() {
         return cancelButton;
     }
 }

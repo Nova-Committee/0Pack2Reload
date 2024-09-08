@@ -20,7 +20,7 @@ public abstract class MixinPackSelectionModel implements IPackSelectionModel {
     private PackRepository repository;
 
     @Override
-    public void cancel() {
+    public void opack2reload_cancel() {
         this.output.accept(this.repository);
     }
 }
