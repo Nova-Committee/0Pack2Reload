@@ -2,10 +2,11 @@ def minecraftVersion = stonecutter.current.version
 def loader = project.name.substring(project.name.lastIndexOf('-') + 1)
 def javaRelease = minecraftVersion == '1.21.11' ? 21 : 25
 def fabric = loader == 'fabric'
+def loaderName = fabric ? 'Fabric' : 'NeoForge'
 
 group = "committee.nova.opack2reload.${loader}"
 version = mod_version
-base.archivesName = "0pack2reload-${minecraftVersion}-${loader}"
+base.archivesName = "${rootProject.name}-${loaderName}-${minecraftVersion}"
 
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(javaRelease)
