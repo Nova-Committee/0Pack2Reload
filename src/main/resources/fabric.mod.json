@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "opack2reload",
+  "version": "${version}",
+  "name": "OPack2Reload",
+  "description": "Skip unnecessary resource pack reloads.",
+  "authors": [
+    "VulpesStella",
+    "Rinko1231"
+  ],
+  "contact": {
+    "sources": "https://github.com/Nova-Committee/0Pack2Reload",
+    "issues": "https://github.com/Nova-Committee/0Pack2Reload/issues"
+  },
+  "license": "Nova Relay License 1.0",
+  "environment": "client",
+  "mixins": [
+    "opack2reload.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabricLoader}",
+    "minecraft": "${minecraft}",
+    "java": ">=${java}"
+  }
+}

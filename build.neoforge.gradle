@@ -1,0 +1,21 @@
+plugins {
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    version = neoforge_version
+
+    runs {
+        client {
+            client()
+        }
+    }
+
+    mods {
+        opack2reload {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+apply from: rootProject.file('gradle/mod.gradle')

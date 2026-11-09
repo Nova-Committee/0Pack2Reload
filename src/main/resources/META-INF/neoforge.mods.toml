@@ -1,0 +1,27 @@
+license = "Nova Relay License 1.0"
+issueTrackerURL = "https://github.com/Nova-Committee/0Pack2Reload/issues"
+
+[[mods]]
+modId = "opack2reload"
+version = "${version}"
+displayName = "OPack2Reload"
+displayURL = "https://github.com/Nova-Committee/0Pack2Reload"
+authors = "VulpesStella, Rinko1231"
+description = "Skip unnecessary resource pack reloads."
+
+[[mixins]]
+config = "opack2reload.mixins.json"
+
+[[dependencies.opack2reload]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neoForge},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.opack2reload]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft}]"
+ordering = "NONE"
+side = "BOTH"
